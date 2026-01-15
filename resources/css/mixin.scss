@@ -1,0 +1,25 @@
+@mixin title-with-icons($icon, $icon-size: 40px, $padding-x: 40px) {
+    position: relative;
+    display: inline-block;
+    padding: 0 $padding-x;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: $icon-size;
+        height: $icon-size;
+        background: url($icon) no-repeat center;
+        background-size: contain;
+        transform: translateY(-50%);
+    }
+
+    &::before {
+        left: 0;
+    }
+
+    &::after {
+        right: 0;
+    }
+}

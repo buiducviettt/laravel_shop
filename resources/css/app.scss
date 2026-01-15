@@ -1,0 +1,333 @@
+@import "./variables.scss";
+@import "tailwindcss";
+@import "styles";
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@font-face {
+    font-family: "Frogie";
+    src: url("../font/Frogie-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Gunny";
+    src: url("../font/gunny.otf") format("opentype");
+}
+@font-face {
+    font-family: "Sifonn";
+    src: url("../font/SIFONN_PRO.otf") format("opentype");
+}
+@font-face {
+    font-family: "UberMove";
+    src: url("../font/UberMoveMedium.otf") format("opentype");
+}
+body {
+    font-family: "Sifonn", sans-serif;
+    background-color: #fff6ed;
+}
+h1 {
+    font-size: 50px;
+    font-family: var(--font-primary);
+}
+:root {
+    --font-primary: "Sifonn";
+    --font-secondary: "Gunny";
+    --font-third: "Frogie";
+    --font-fourth: "UberMove";
+    --main-color: #9cc496;
+    --sec-color: #ffecdb;
+}
+.header {
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    ul {
+        margin-bottom: 0rem;
+    }
+    background-color: #d2cdc8;
+    padding: 1.2rem 0rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    height: $header-height;
+    transition: height 0.3s ease, padding 0.3s ease, background 0.3s ease;
+    &.scrolled {
+        height: 70px; // chiều cao khi scroll
+        padding: 0.8rem 2.4rem;
+        background-color: rgba(156, 196, 150, 0.9); // OPTIONAL: mờ khi scroll
+        backdrop-filter: blur(6px); // OPTIONAL: hiệu ứng mượt
+        transition: all 0.3s ease-in-out;
+        .nav-left {
+            .nav-list {
+                .nav-item {
+                    font-size: 1rem;
+                }
+            }
+        }
+        .nav-right {
+            .nav-list {
+                .header-icon {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+        }
+    }
+    .wrapper {
+        display: flex;
+        justify-content: space-between;
+        .nav-ceter {
+            .search-bar {
+                width: 100%; // ô search full theo container
+                width: 400px;
+                max-width: 500px; // giống ảnh bạn gửi
+                height: 50px;
+                background: #fef0e3; // màu nền ô search
+                border-radius: 50px;
+                display: flex;
+                align-items: center;
+                padding: 0 25px;
+                input {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    outline: none;
+                    background: transparent;
+                    font-size: 20px;
+                    color: #333;
+                    padding-left: 10px;
+                }
+                .icon {
+                    font-size: 22px;
+                    color: #555;
+                }
+            }
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            .nav-list {
+                .header-icon {
+                    cursor: pointer;
+                    width: 30px;
+                    height: 30px;
+                    transition: all 0.3s ease;
+                    &:hover {
+                        transform: scale(1.2);
+                    }
+                }
+            }
+        }
+        .nav-left {
+            .logo {
+                .title {
+                    font-size: 2rem;
+                    font-weight: 900;
+                }
+            }
+            .nav-list {
+                .nav-item {
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+        .nav-left,
+        .nav-right {
+            align-items: center;
+            display: flex;
+            gap: 2.4rem;
+            .nav-list {
+                display: flex;
+                gap: 2.4rem;
+            }
+        }
+    }
+}
+.body-content {
+    margin-top: 90px;
+}
+.body-content.is-login-page {
+    margin-top: 0;
+}
+// đảo ngược vị trí
+.is-reverse {
+    flex-direction: column-reverse !important;
+}
+// animation
+@keyframes pop {
+    0% {
+        transform: translate(-100%, -20%) scale(0.5);
+    }
+    50% {
+        transform: translate(-100%, -20%) scale(1.2);
+    }
+    100% {
+        transform: translate(-100%, -20%) scale(1);
+    }
+}
+// styles dùng chung
+.title-wrapper {
+    text-align: center;
+    .sec-title {
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+}
+
+.sec-gap {
+    padding: 3rem 0;
+}
+.shop-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%; // QUAN TRỌNG
+}
+
+.shop-card__media {
+    width: fit-content; // QUAN TRỌNG
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.shop-card__image img {
+    width: 324px; // hoặc max-width: 100%
+    height: auto;
+    border-radius: 24px;
+    display: block;
+}
+
+.shop-card__cta {
+    display: block;
+    width: 100%; // ăn theo media (card)
+    text-align: center;
+    padding: 1rem 0;
+    border-radius: 40px;
+    background-color: var(--main-color);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+// moodboard
+.moodboard-item {
+    position: relative;
+    &__title {
+        position: absolute;
+        left: -10px; // đẩy chữ ra ngoài ảnh
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center; // chữ ngắn → giữa, chữ dài → dâng lên
+        pointer-events: none;
+        // màu chữ 70%
+        color: rgba(0, 0, 0, 0.7);
+    }
+}
+.vertical-text {
+    writing-mode: vertical-lr; // 🔴 hướng chữ RA NGOÀI
+    text-orientation: mixed;
+    letter-spacing: 4px;
+    transform: rotate(180deg);
+}
+.site-footer {
+    h4 {
+        color: white;
+        text-transform: uppercase;
+    }
+    ul {
+        padding-left: 0px;
+        color: white;
+        font-family: "Inter", sans-serif;
+        li {
+            font-weight: normal;
+        }
+    }
+    .footer-top {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 4rem;
+    }
+    background-color: var(--main-color);
+    padding: 3rem 0;
+    .footer-links {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+    }
+    .footer-newsletter {
+        margin-top: 5rem;
+    }
+}
+.error-text {
+    color: #e53935;
+    font-size: 13px;
+    margin-top: 4px;
+    display: block;
+}
+.is-invalid {
+    border: 1px solid #e53935 !important;
+}
+.btn {
+    margin-top: 16px;
+    padding: 10px 20px;
+    background-color: var(--main-color);
+    &:hover {
+        background-color: #000;
+        color: white;
+    }
+}
+.gallery-grid {
+    display: grid;
+    /* làm cột trái hẹp hơn => tall thon */
+    grid-template-columns: 1.1fr 1fr;
+
+    /* tăng chiều cao row => tall cao hơn */
+    grid-template-rows: repeat(2, 280px);
+    gap: 24px;
+
+    .gallery-card {
+        border-radius: 18px;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        &.tall {
+            grid-row: 1 / span 2;
+            grid-column: 1;
+        }
+    }
+
+    // 2 card bên phải
+    .gallery-card:nth-child(2) {
+        grid-row: 1;
+        grid-column: 2;
+    }
+
+    .gallery-card:nth-child(3) {
+        grid-row: 2;
+        grid-column: 2;
+    }
+}
+select {
+    cursor: pointer;
+    background-color: var(--main-color);
+    padding: 14px 18px;
+    border-radius: 14px;
+    color: white;
+}
