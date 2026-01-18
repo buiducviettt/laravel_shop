@@ -10,20 +10,19 @@
         <div class="collection-items">
          @foreach($categories as $item)
   <div class="trend-card">
-    <img src="{{ Vite::asset($item['image']) }}" alt="{{ $item['name'] }}">
-    <span>{{ $item['name'] }}</span>
+<img src="{{ $item->image }}" alt="{{ $item->name }}">
+    <span>{{ $item->name }}</span>
   </div>
         @endforeach
         </div>
     </section>
   <section class="gallery-masonry">
     @foreach($trendings as $item)
-        <div class="gallery-card is-{{ $item['type'] }}">
-            <img src="{{ Vite::asset($item['image']) }}" alt="">
+        <div class="gallery-card is-{{ $item->type }}">
+           <img src="{{ $item->image }}" alt="{{ $item->name }}">
         </div>
     @endforeach
 </section>
-
 </div>
 </div>
 @endsection
