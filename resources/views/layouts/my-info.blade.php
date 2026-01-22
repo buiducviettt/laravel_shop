@@ -3,7 +3,6 @@
 <div class="my-info-page">
     <div class="container">
         <div class="wrapper">
-
             <!-- SIDEBAR -->
             <aside class="sidebar">
                 <div class="sidebar-header">
@@ -13,7 +12,6 @@
                                 MY PROFILE
                             </button>
                         </a>
-
                         <a href="{{ route('my-info.address') }}">
                             <button class="btn tab-btn {{ request()->routeIs('my-info.address') ? 'active' : '' }}">
                                 ADDRESS
@@ -25,7 +23,6 @@
                         <button class="btn tab-btn">MEMBERSHIP</button>
                     </div>
                 </div>
-
                 <div class="sidebar-footer">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

@@ -9,7 +9,9 @@ class TrendingProduct extends Model
     //
     protected $fillable = [
         'product_id',
-        'priority'
+        'priority',
+        'image'
+
     ];
     public function product(){
         return $this->belongsTo(Product::class);

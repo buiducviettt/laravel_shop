@@ -23,40 +23,197 @@ class ProductSeeder extends Seeder
         $material = DB::table('product_materials')->where('name', 'Cotton')->value('id');
 
         $products = [
+    [
+        'name'        => 'Basic Cotton T-Shirt',
+        'slug'        => 'basic-cotton-t-shirt',
+        'description' => 'Áo thun cotton form basic, dễ phối đồ, mặc hằng ngày.',
+        'base_price'  => 199000,
+        'images' => [
             [
-                'name'        => 'Basic Cotton T-Shirt',
-                'slug'        => 'basic-cotton-t-shirt',
-                'description' => 'Áo thun cotton form basic, dễ phối đồ, mặc hằng ngày.',
-                'base_price'  => 199000,
-                'images' => [
-                    [
-                        'image_url' => 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=80',
-                        'is_main'   => true,
-                        'sort_order'=> 1,
-                    ],
-                    [
-                        'image_url' => 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=80',
-                        'is_main'   => false,
-                        'sort_order'=> 2,
-                    ],
-                ],
+                'image_url' => 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => true,
+                'sort_order'=> 1,
             ],
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => false,
+                'sort_order'=> 2,
+            ],
+        ],
+    ],
 
-            // ✅ Thêm sản phẩm thứ 2 ở đây
+    [
+        'name'        => 'Oversized Streetwear T-Shirt',
+        'slug'        => 'oversized-streetwear-t-shirt',
+        'description' => 'Áo thun form rộng phong cách streetwear, mặc cực thoải mái.',
+        'base_price'  => 249000,
+        'images' => [
             [
-                'name'        => 'Oversized T-Shirt',
-                'slug'        => 'oversized-t-shirt',
-                'description' => 'Áo thun form rộng streetwear.',
-                'base_price'  => 249000,
-                'images' => [
-                    [
-                        'image_url' => 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=1200&q=80',
-                        'is_main'   => true,
-                        'sort_order'=> 1,
-                    ],
-                ],
+                'image_url' => 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => true,
+                'sort_order'=> 1,
             ],
-        ];
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => false,
+                'sort_order'=> 2,
+            ],
+        ],
+    ],
+
+    [
+        'name'        => 'Premium Heavyweight Tee',
+        'slug'        => 'premium-heavyweight-tee',
+        'description' => 'Áo thun dày dặn premium, đứng form, mặc sang.',
+        'base_price'  => 299000,
+        'images' => [
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1542060748-10c28b62716f?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => true,
+                'sort_order'=> 1,
+            ],
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => false,
+                'sort_order'=> 2,
+            ],
+        ],
+    ],
+
+    [
+        'name'        => 'Minimal Logo T-Shirt',
+        'slug'        => 'minimal-logo-t-shirt',
+        'description' => 'Áo thun minimal in logo nhỏ, dễ phối với mọi outfit.',
+        'base_price'  => 229000,
+        'images' => [
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => true,
+                'sort_order'=> 1,
+            ],
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1520975958225-1d09f12fdd3c?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => false,
+                'sort_order'=> 2,
+            ],
+        ],
+    ],
+
+    [
+        'name'        => 'Relax Fit T-Shirt',
+        'slug'        => 'relax-fit-t-shirt',
+        'description' => 'Áo thun relax fit rộng vừa đủ, mặc mát và thoáng.',
+        'base_price'  => 219000,
+        'images' => [
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => true,
+                'sort_order'=> 1,
+            ],
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => false,
+                'sort_order'=> 2,
+            ],
+        ],
+    ],
+
+    [
+        'name'        => 'Vintage Wash Tee',
+        'slug'        => 'vintage-wash-tee',
+        'description' => 'Áo thun wash vintage, màu loang nhẹ đẹp kiểu retro.',
+        'base_price'  => 279000,
+        'images' => [
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1520975682031-ae3e4b192a4b?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => true,
+                'sort_order'=> 1,
+            ],
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => false,
+                'sort_order'=> 2,
+            ],
+        ],
+    ],
+
+    [
+        'name'        => 'Graphic Print T-Shirt',
+        'slug'        => 'graphic-print-t-shirt',
+        'description' => 'Áo thun in graphic nổi bật, hợp đi chơi / streetstyle.',
+        'base_price'  => 259000,
+        'images' => [
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1520975437871-3ca1ca6c1661?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => true,
+                'sort_order'=> 1,
+            ],
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => false,
+                'sort_order'=> 2,
+            ],
+        ],
+    ],
+
+    [
+        'name'        => 'Slim Fit T-Shirt',
+        'slug'        => 'slim-fit-t-shirt',
+        'description' => 'Áo thun ôm nhẹ (slim fit), tôn dáng, mặc gọn gàng.',
+        'base_price'  => 189000,
+        'images' => [
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => true,
+                'sort_order'=> 1,
+            ],
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1520975869010-8d8c2de9ae89?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => false,
+                'sort_order'=> 2,
+            ],
+        ],
+    ],
+
+    [
+        'name'        => 'Essential Daily Tee',
+        'slug'        => 'essential-daily-tee',
+        'description' => 'Áo thun essentials mặc đi học/đi làm, đơn giản dễ phối.',
+        'base_price'  => 179000,
+        'images' => [
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1520975599462-6b5390db4970?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => true,
+                'sort_order'=> 1,
+            ],
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => false,
+                'sort_order'=> 2,
+            ],
+        ],
+    ],
+
+    [
+        'name'        => 'Soft Touch Cotton Tee',
+        'slug'        => 'soft-touch-cotton-tee',
+        'description' => 'Áo thun cotton mềm mịn, mặc cực êm và ít nhăn.',
+        'base_price'  => 239000,
+        'images' => [
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => true,
+                'sort_order'=> 1,
+            ],
+            [
+                'image_url' => 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=1200&q=80',
+                'is_main'   => false,
+                'sort_order'=> 2,
+            ],
+        ],
+    ],
+];
+
 
         foreach ($products as $p) {
 

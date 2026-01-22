@@ -6,8 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
-class User extends Authenticatable
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
+class User extends Authenticatable implements FilamentUser, HasName
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -23,8 +24,27 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'avatar'
+        'avatar',
+        'is_admin',
     ];
+      /**
+     * Cho phép user truy cập admin panel
+     */
+  public function canAccessPanel(\Filament\Panel $panel): bool
+{// chặn user ko phải là admin 
+
+    return (bool) $this->is_admin;
+}
+     /**
+     * TÊN HIỂN THỊ TRONG ADMIN
+     */
+  public function getFilamentName(): string
+{
+    return trim(($this->first_name ?? '') . ' ' . ($this->last_name ?? '').' '.'(ADMIN)')
+        ?: $this->email;
+}
+
+    
     // một người có nhiều địa chỉ 
 public function addresses()
 {
@@ -51,6 +71,7 @@ public function addresses()
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            
         ];
     }
 }
