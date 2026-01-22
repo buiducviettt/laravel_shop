@@ -8,12 +8,12 @@
         <h1 class="sec-title">COTTAGECORE</h1>
         </div>
         <div class="collection-items">
-         @foreach($categories as $item)
-  <div class="trend-card">
-<img src="{{ $item->image }}" alt="{{ $item->name }}">
-    <span>{{ $item->name }}</span>
-  </div>
-        @endforeach
+    @foreach($categories as $item)
+    <div class="trend-card">
+        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
+        <span>{{ $item->name }}</span>
+    </div>
+@endforeach
         </div>
     </section>
   <section class="gallery-masonry">

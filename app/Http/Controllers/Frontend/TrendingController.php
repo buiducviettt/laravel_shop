@@ -19,13 +19,17 @@ class TrendingController extends Controller
         // trending products (join sang products)
         $trendings = DB::table('trending_products')
             ->join('products', 'trending_products.product_id', '=', 'products.id')
+             ->leftJoin('product_images', function ($join) {
+        $join->on('product_images.product_id', '=', 'products.id')
+             ->where('product_images.is_main', 1);
+    })
             ->select(
-                'products.id',
-                'products.name',
-                'products.slug',
-                'products.image',
-                'products.base_price',
-                'trending_products.type'
+                    'products.id',
+                    'products.name',
+                    'products.slug',
+                    'products.base_price',
+                    'trending_products.type',
+                    'product_images.image_url as image'  
             )
            ->orderBy('trending_products.priority')
             ->get();

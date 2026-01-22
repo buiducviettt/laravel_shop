@@ -570,7 +570,9 @@
         justify-content: center;
         color: #5f6f5f;
         font-weight: 500;
-        transition: background 0.25s ease, opacity 0.25s ease;
+        transition:
+            background 0.25s ease,
+            opacity 0.25s ease;
     }
 
     .upload-icon {
@@ -642,6 +644,12 @@
     .gallery-masonry {
         column-count: 2;
         column-gap: 16px;
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 18px;
+        }
         .gallery-card {
             break-inside: avoid;
             margin-bottom: 16px;

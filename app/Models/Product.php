@@ -4,7 +4,7 @@ namespace App\Models;
 use App\Models\Variant;
 use App\Models\Category;
 use App\Models\Collection;
-
+use App\Models\ProductImage;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -31,6 +31,18 @@ class Product extends Model
     }
     public function trending(){
         return $this->hasOne(TrendingProduct::class);
+    }
+     public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    // ✅ (KHUYÊN DÙNG) ẢNH CHÍNH
+    public function mainImage()
+    {
+        return $this->hasOne(ProductImage::class)
+            ->where('is_main', true)
+            ->orderBy('sort_order');
     }
     
 }
