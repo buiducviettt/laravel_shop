@@ -5,7 +5,7 @@
     <div class="container">
     <section class=" sec-gap list-collections">
         <div class="title-wrapper">
-        <h1 class="sec-title">COTTAGECORE</h1>
+        <h1 class="sec-title">OUR TRENDING</h1>
         </div>
         <div class="collection-items">
     @foreach($categories as $item)
@@ -19,7 +19,7 @@
   <section class="gallery-masonry">
     @foreach($trendings as $item)
         <div class="gallery-card is-{{ $item->type }}">
-           <img src="{{ $item->image }}" alt="{{ $item->name }}">
+           <img src="{{ asset('storage/' . $item->image )}}" alt="{{ $item->name }}">
         </div>
     @endforeach
 </section>

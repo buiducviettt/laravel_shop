@@ -41,3 +41,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 import "./profile";
 import "./apicountry";
+import "./cart";
+import "./attribute";

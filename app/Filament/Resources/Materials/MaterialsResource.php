@@ -17,21 +17,19 @@ use Filament\Tables\Table;
 class MaterialsResource extends Resource
 {
     protected static ?string $model = Materials::class;
-
+    // tạo materials vào nhóm thuộc tính sản phẩm 
+    protected static string|\UnitEnum|null $navigationGroup = 'Thuộc tính sản phẩm';
+    protected static ?string $navigationLabel = 'Chất liệu';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
-    protected static ?string $recordTitleAttribute = 'Materials';
-
+    protected static ?string $recordTitleAttribute = 'name';
     public static function form(Schema $schema): Schema
     {
         return MaterialsForm::configure($schema);
     }
-
     public static function table(Table $table): Table
     {
         return MaterialsTable::configure($table);
     }
-
     public static function getRelations(): array
     {
         return [

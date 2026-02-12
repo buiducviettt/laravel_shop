@@ -3,12 +3,12 @@
   <div class="wrapper">
     <div class="nav-left">
       <div class="logo">
-     <a   href="{{route('home')}}"><h1 class="title">DViet Clothes</h1></a>
+     <a   href="{{route('home')}}"><h1 class="title">Teelab</h1></a>
     </div>
      <nav>
         <ul class=" nav-list ">
-         <li class="nav-item"> NEW IN</li>
-         <li class="nav-item">GET THE LOOK</li>
+         <a href="{{route('products.index')}}"><li class="nav-item"> NEW IN</li></a>
+         <a href="{{route('products.index')}}"><li class="nav-item">OUR PRODUCTS</li></a>
          <li class="nav-item"> SALE</li>
         </ul>      
     </nav>
@@ -40,11 +40,27 @@
     
    <img class="header-icon" src="{{ Vite::asset('resources/images/wishlist.png') }}" alt="">
 </li>
-<li class="nav-item">
+<li class="nav-item">  
+    <div class="img-cart" id="cart-toggle">
+       <div class="cart-count">
+        <span class="cart-num">  {{ collect(session('cart', []))->sum('quantity') }}</span>
+  </div>
     <img class="header-icon" src="{{ Vite::asset('resources/images/cart.png') }}" alt="">
+    </div>    
 </li>
         </ul>      
     </nav>
+    </div>
+    {{-- MInicart --}}
+    <!-- MINI CART -->
+        <div id="mini-cart" class="mini-cart hidden">
+            <div class="mini-cart-header">
+        <h4>Giỏ hàng</h4>
+         <button id="close-cart" class="close-cart" >✖</button>
+         </div>
+        <div class="mini-cart-items"></div>
+        <a href="/checkout" class="btn-checkout">Thanh toán</a>
+    </div>
     </div>
     </div>  
     </div>
