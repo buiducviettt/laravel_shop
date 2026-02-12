@@ -4,10 +4,12 @@
 <div class="homepage">
    <div class="banner">
   <div class="banner-bg">
-      <img src="{{ Vite::asset('resources/images/banner.png') }}" alt="Banner">
+     <img src="{{ asset('storage/' . data_get($page->content, 'hero.image')) }}" alt="">
     </div>
    <div class="content-banner">
-    <h1 class="banner-title">ARTIQUE</h1>
+    <h1 class="banner-title">
+    {{ data_get($page->content, 'hero.title', '') }}
+    </h1>
     <div class="decor-pop star-decor star-1">
         <img src="{{Vite::asset('resources/images/star.png')}}" alt="">
     </div>
@@ -15,9 +17,9 @@
         <img src="{{Vite::asset('resources/images/star.png')}}" alt="">
     </div>
     <div class="sub-title">
-    <span>Browse</span>
-    <span>Pin</span>
-    <span>Shop</span>
+  @foreach (data_get($page->content,'hero.subtitle',[]) as $subtitle)
+ <span>{{ $subtitle['text'] ?? '' }}</span>    
+  @endforeach
     </div>
    </div>
    </div>
@@ -27,39 +29,25 @@
     <h1 class="sec-title trending-title">Trending</h1>
     </div>
     <div class="trending-grid">
-      <div class="trend-card tall">
-        <img src="{{Vite::asset('resources/images/trend1.png')}}" alt="">
-        <span >COTTAGECORE</span>
-      </div>
-      <div class="trend-card">
-     <img src="{{Vite::asset('resources/images/trend1.png')}}" alt="">
-      <span>Y2K</span>
+      {{-- trending-grid --}}
+  @foreach ($trendingIds as $index => $id)
+    @php
+      $collection = $collections[$id] ?? null;
+      if (!$collection) continue;
+      $cardClass = $layoutMap[$index] ?? 'trend-card';
+    @endphp
+    <div class="{{ $cardClass }}">
+      <div class="overlay"></div>
+      <img
+        src="{{ asset('storage/' . $collection->image) }}"
+        alt="{{ $collection->name }}"
+      >
+      <span>{{ strtoupper($collection->name) }}</span>
     </div>
-    <div class="trend-card">
-       <img src="{{Vite::asset('resources/images/trend1.png')}}" alt="">
-      <span>VINTAGE</span>
-    </div>
-
-    <div class="trend-card">
-       <img src="{{Vite::asset('resources/images/trend1.png')}}" alt="">
-      <span>STREETWARE</span>
-    </div>
-
-    <div class="trend-card tall">
-       <img src="{{Vite::asset('resources/images/trend1.png')}}" alt="">
-      <span>MINIMALISTIC</span>
+  @endforeach
+</div> 
     </div>
 
-     <div class="trend-card">
-     <img src="{{Vite::asset('resources/images/trend1.png')}}" alt="">
-      <span>Y2K</span>
-    </div>
-    <div class="trend-card">
-        <img src="{{Vite::asset('resources/images/trend1.png')}}" alt="">
-      <span>BOHO</span>
-    </div>
-    </div>
-    </div>
    </section>
    <!-- Danh mục sản phẩm -->
    <section class="sec-gap shop-cate">
@@ -70,57 +58,17 @@
     <div class="shop-items">
       <div class="swiper shop-cate-swiper">
         <div class="swiper-wrapper"> 
-           <div class="swiper-slide"> 
-     <x-shop-item
-        image="{{ Vite::asset('resources/images/shopcate1.png') }}"
-        cta-text="VISIT"
-        alt="Shop item"
-        link="/shop"
-    />
-</div>
+      @foreach( $categories as $item)
 <div class="swiper-slide"> 
      <x-shop-item
-        image="{{ Vite::asset('resources/images/shopcate1.png') }}"
+        image="{{ asset('storage/' . $item->image) }}"
         cta-text="VISIT"
         alt="Shop item"
-        link="/shop"
+        link="{{ route('categories.show', $item->slug) }}"
     />
 </div>
-<div class="swiper-slide"> 
-     <x-shop-item
-        image="{{ Vite::asset('resources/images/shopcate1.png') }}"
-        cta-text="VISIT"
-        alt="Shop item"
-        link="/shop"
-    />
-</div>
-<div class="swiper-slide"> 
-     <x-shop-item
-        image="{{ Vite::asset('resources/images/shopcate1.png') }}"
-        cta-text="VISIT"
-        alt="Shop item"
-        link="/shop"
-    />
-</div>
-<div class="swiper-slide"> 
-     <x-shop-item
-        image="{{ Vite::asset('resources/images/shopcate1.png') }}"
-        cta-text="VISIT"
-        alt="Shop item"
-        link="/shop"
-    />
-</div>
-<div class="swiper-slide"> 
-     <x-shop-item
-        image="{{ Vite::asset('resources/images/shopcate1.png') }}"
-        cta-text="VISIT"
-        alt="Shop item"
-        link="/shop"
-    />
-</div>
+      @endforeach
     </div> 
-    
-
     </div>  
     <button class="slider-btn shop-cate-slider prev">◀</button>
       <button class="slider-btn shop-cate-slider next">▶</button>
@@ -134,43 +82,31 @@
     </div>
     <div class="moodboard-items">
       <div class="row">
-        <div class="col-12 col-md-3">
-          <x-moodboard-item
-            image="{{ Vite::asset('resources/images/moodboard1.png') }}"
-            alt="Moodboard item"
-            title="BEACHY"
-          />
-        </div>
-         <div class="col-12 col-md-3">
-          <x-moodboard-item
-            image="{{ Vite::asset('resources/images/moodboard1.png') }}"
-            alt="Moodboard item"
-            title="ACADEMIA"
-          />
-        </div>
+      @foreach(data_get($page->content, 'moodboard', []) as $item)
+    <div class="col-12 col-md-3">
+        <x-moodboard-item
+            image="{{ asset('storage/' . $item['image']) }}"
+            title="{{ $item['title'] }}"
+        />
+    </div>
+@endforeach
       </div>
     </div>
     </div>
    </section>
   <section class="sec-gap collection-sec">
     <div class="title-wrapper">
-    <h1 class="sec-title collection-title">Collection</h1>
+    <h1 class="sec-title collection-title">Collections</h1>
     </div>
     <div class="collection-items">
       <div class="container">
       <div class="row gy-5">
+        @foreach($collections as $item)
         <div class="col col-12 col-md-4">
-          <button class=collection-btn><span>DRESSES</span></button>
-        </div>
-         <div class="col col-12 col-md-4">
-          <button class=collection-btn><span>DRESSES</span></button>
-        </div>
-           <div class="col col-12 col-md-4">
-          <button class=collection-btn><span>DRESSES</span></button>
-        </div>
-         <div class="col col-12 col-md-4">
-          <button class=collection-btn><span>DRESSES</span></button>
-        </div>
+          <button class=collection-btn><span>{{$item->name}}</span></button>
+        </div>  
+        @endforeach  
+       
       </div>
       </div>
     </div>
@@ -180,42 +116,39 @@
     <div class="title-wrapper">
     <h1 class="sec-title curated-pins-title">Curated Pins</h1>
     </div>
-   <div class="curated-pin-grid">
-  <!-- big ngang -->
-  <div class="curated-pin-card large">
-    <img src="{{ Vite::asset('resources/images/pin1.png') }}" alt="">
-  </div>
+    <div class="test">
+    </div>
+    {{-- tạo cái layout cứng cơ bản --}}
+@php
+$pinLayoutMap = [
+    0 => 'large',              // Pin lớn bên trái
+    1 => 'tall featured',      // Cao – cột 3
+    2 => 'normal featured',    // Nhỏ – cột 4
+    3 => 'tall secondary',     // Cao – cột 4
+    4 => 'normal secondary',
+    5 => 'normal secondary',
+    6 => 'normal secondary',       // Large hàng dưới
+    7 => 'large fourth',
+    8 => 'tall fourth',
+    9 => 'tall fourth',
+   
+];
 
-  <!-- cao -->
-  <div class="curated-pin-card tall featured ">
-    <img src="{{ Vite::asset('resources/images/trend1.png') }}" alt="">
-  </div>
-<!-- Bình thường -->
-  <div class="curated-pin-card normal featured ">
-    <img src="{{ Vite::asset('resources/images/trend1.png') }}" alt="">
-  </div>
-  <!-- row2 -->
-   <div class="curated-pin-card tall secondary ">
-    <img src="{{ Vite::asset('resources/images/trend1.png') }}" alt="">
-  </div>
-  <div class="curated-pin-card normal secondary ">
-    <img src="{{ Vite::asset('resources/images/trend1.png') }}" alt="">
-  </div>
-  <div class="curated-pin-card normal secondary ">
-    <img src="{{ Vite::asset('resources/images/trend1.png') }}" alt="">
-  </div>
-  <div class="curated-pin-card normal secondary ">
-    <img src="{{ Vite::asset('resources/images/trend1.png') }}" alt="">
-  </div>
-   <div class="curated-pin-card normal secondary ">
-    <img src="{{ Vite::asset('resources/images/curated1.png') }}" alt="">
-  </div>
-  <div class="curated-pin-card normal secondary ">
-    <img src="{{ Vite::asset('resources/images/curated1.png') }}" alt="">
-  </div>
-  <div class="curated-pin-card large fourth  ">
-    <img src="{{ Vite::asset('resources/images/curated1.png') }}" alt="">
-  </div>  
+
+@endphp
+   <div class="curated-pin-grid">
+@foreach($curatedPinIds as $index => $pinId)
+    @php
+        $pin = $curatedPins[$pinId] ?? null;
+        $class = 'curated-pin-card ' . ($pinLayoutMap[$index] ?? 'normal');
+    @endphp
+    @if($pin)
+        <div class="{{ $class }}">
+            <img src="{{ asset('storage/' . $pin->image) }}" alt="">
+        </div>
+    @endif
+@endforeach
+
 </div>
     </div>
   </section>
@@ -226,42 +159,17 @@
     </div>
     <div class="hottest-collection">
       <div class="row">
-        <div class="col-12 col-md-3">
-          <x-hottest-card
-            image="{{ Vite::asset('resources/images/curated1.png') }}"
-            alt="Hottest buy item"
-            link="#"
+      @foreach($categories as $index => $item)
+    <div class="col-12 col-md-3 gy-5">
+       <x-hottest-card
+            image="{{ asset('storage/' . $item->image) }}"
+            alt="{{ $item->title }}"
+            link="{{ route('categories.show', $item->slug) }}"
+            class="{{ $loop->even ? 'is-reverse' : '' }}"
             ctaText="VISIT"
-          />
-        </div>
-         <div class="col-12 col-md-3">
-          <x-hottest-card
-            image="{{ Vite::asset('resources/images/curated1.png') }}"
-            alt="Hottest buy item"
-            link="#"
-            class="is-reverse"
-            ctaText="VISIT"
-          />
-        </div>
-         <div class="col-12 col-md-3">
-          <x-hottest-card
-            image="{{ Vite::asset('resources/images/curated1.png') }}"
-            alt="Hottest buy item"
-            link="#"
-           
-            ctaText="VISIT"
-          />
-        </div>
-         <div class="col-12 col-md-3">
-          <x-hottest-card
-            image="{{ Vite::asset('resources/images/curated1.png') }}"
-            alt="Hottest buy item"
-            link="#"
-            class="is-reverse"
-            ctaText="VISIT"
-          />
-        </div>
-      </div>
+        />
+    </div>
+@endforeach
     </div>
     </div>
   </section>
@@ -277,17 +185,19 @@
         <div class="wrapper">
           <div class="row">
             <div class="col col-md-6">
-              <div class="image">
-                <img src="{{ Vite::asset('resources/images/trend1.png') }}" alt="">
-              </div>
+           <div class="image">
+    <img src="{{ asset('storage/' . data_get($page->content, 'about_us.image')) }}" alt="">
+</div>
             </div>
              <div class="col col-md-6">
               <div class="text-content">     
                 <p class="about-text">
-                  Inspo.com is a fashion haven for those who seek to bring their Pinterest boards to life. Our platform seamlessly connects your style inspirations with real-world fashion, allowing you to effortlessly discover and shop for the exact clothing items you love. Whether you're looking for that perfect outfit you pinned months ago or seeking new, trendy pieces, Inspo.com is your go-to destination. Join us and explore a world where your fashion dreams become a reality.</p>
+                  {{ data_get($page->content, 'about_us.description') }}
+                </p>
+              </div>
             </div>
             <div class="cta">
-              <a href="#" class="shop-card__cta">Shop Now</a>
+              <a href="{{route('products.index')}}" class="shop-card__cta">Shop Now</a>
             </div>
           </div>
         </div>
@@ -295,6 +205,7 @@
     </div>
     </div>
   </div>
+      </div>
   </div>
  </section>
    </div>

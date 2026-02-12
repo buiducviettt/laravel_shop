@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,16 +12,15 @@ class Address extends Model
         'user_id',
         'label',
         'main_location',
-        'landmark',        
+        'landmark',
         'alternative',
         'pin_code',
         'city_state',
         'country',
-        'is_default',  
+        'is_default',
     ];
     public function user()
-{
-    return $this->belongsTo(User::class);
-}
-
+    {
+        return $this->belongsTo(User::class);
+    }
 }

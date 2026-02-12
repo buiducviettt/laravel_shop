@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-use App\Models\Variant;
+
+use App\Models\ProductVariants;
 use App\Models\Category;
 use App\Models\Collection;
 use App\Models\ProductImage;
@@ -20,23 +21,30 @@ class Product extends Model
         'base_price',
         'is_active'
     ];
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
-    public function collection(){
+    public function collection()
+    {
         return $this->belongsTo(Collection::class);
     }
-    public function variants(){
-        return $this->hasMany(Variant::class);
+    public function variants()
+    {
+        return $this->hasMany(ProductVariants::class);
     }
-    public function trending(){
+    public function trending()
+    {
         return $this->hasOne(TrendingProduct::class);
     }
-     public function images()
+    public function images()
     {
         return $this->hasMany(ProductImage::class);
     }
-
+    public function getRouteKeyName() // hàm để gọi slug
+    {
+        return 'slug';
+    }
     // ✅ (KHUYÊN DÙNG) ẢNH CHÍNH
     public function mainImage()
     {
@@ -44,5 +52,4 @@ class Product extends Model
             ->where('is_main', true)
             ->orderBy('sort_order');
     }
-    
 }

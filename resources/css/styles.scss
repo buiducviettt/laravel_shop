@@ -13,6 +13,45 @@
             width: 100%;
         }
     }
+    //shop-cate scss
+    .shop-cate {
+        .shop-cate-title {
+            @include title-with-icons("../images/star.png");
+        }
+        .shop-cate-swiper {
+            .swiper-slide {
+                width: 320px; // đúng với card của bạn
+                height: auto;
+            }
+        }
+        .shop-items {
+            position: relative;
+            .swiper {
+                padding: 0 2.4rem;
+            }
+            .slider-btn {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 20;
+                font-size: 40px;
+                color: var(--main-color);
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &.prev {
+                    left: -22px; // đè ra ngoài nhẹ
+                }
+
+                &.next {
+                    right: -22px;
+                }
+            }
+        }
+    }
     .content-banner {
         position: absolute;
         top: 50%;
@@ -82,14 +121,25 @@
             }
         }
         .trending-grid {
+            position: relative;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             grid-auto-rows: 250px;
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
             .trend-card {
                 position: relative;
                 border-radius: 24px;
                 overflow: hidden;
+                // lớp phủ
+
                 span {
                     position: absolute;
                     bottom: 10px;
@@ -100,53 +150,25 @@
                 }
                 &.tall {
                     grid-row: span 2;
+                    img {
+                        height: 100%;
+                        width: auto;
+                    }
                 }
             }
         }
     }
-    //shop-cate scss
-    .shop-cate {
-        .shop-cate-title {
-            @include title-with-icons("../images/star.png");
-        }
-        .shop-cate-swiper {
-            .swiper-slide {
-                width: 320px; // đúng với card của bạn
-                height: auto;
-            }
-        }
-        .shop-items {
-            position: relative;
-            .swiper {
-                padding: 0 2.4rem;
-            }
-            .slider-btn {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                z-index: 20;
-                font-size: 40px;
-                color: var(--main-color);
-                border: none;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
 
-                &.prev {
-                    left: -22px; // đè ra ngoài nhẹ
-                }
-
-                &.next {
-                    right: -22px;
-                }
-            }
-        }
-    }
     .collection-sec {
         .collection-btn {
             background-color: #9cc496;
             border-radius: 40px;
+            width: auto; /* ❗ quan trọng */
+            max-width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap; /* không xuống dòng */
             padding: 62px 100px;
             border: 1px solid transparent;
             span {
@@ -163,12 +185,9 @@
         .curated-pin-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows:
-                200px
-                100px
-                300px
-                300px;
+            grid-auto-rows: 160px;
             gap: 24px;
+            grid-auto-flow: dense; // fill the empty space
             .curated-pin-card {
                 position: relative;
                 border-radius: 24px;
@@ -207,7 +226,11 @@
                 }
                 &.large.fourth {
                     grid-column: 3 / span 2;
-                    grid-row: auto;
+                    grid-row: span 2;
+                }
+                &.tall.fourth {
+                    grid-column: span 1;
+                    grid-row: span 2;
                 }
             }
         }
@@ -798,5 +821,82 @@
         font-size: 12px;
         padding: 4px 10px;
         border-radius: 999px;
+    }
+}
+.product-page {
+}
+.product-card {
+    .img-prod {
+        border-radius: 16px;
+        margin-bottom: 24px;
+        width: 100%;
+        aspect-ratio: 1 / 1; /* hoặc 4 / 5 */
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* quan trọng */
+            object-position: center;
+            display: block;
+        }
+    }
+    a {
+        color: black;
+        text-decoration: none;
+    }
+    .prod-name {
+        // 1 hàng text
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+}
+.product-detail-page {
+    .product-content {
+        .price {
+            font-size: 24px;
+        }
+        .product-attribute {
+            display: flex;
+            gap: 24px;
+            flex-direction: column;
+        }
+    }
+}
+//global style
+.attr {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}
+.color {
+    .color-img {
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        &.active {
+            border: 2px solid #000;
+        }
+    }
+    .color-img-list {
+        display: flex;
+        gap: 12px;
+    }
+}
+.size {
+    .size-list {
+        .size-icon {
+            border: 1px solid #000;
+            border-radius: 10px;
+            padding: 6px 12px;
+            cursor: pointer;
+            &.active {
+                background-color: #000;
+                color: #fff;
+            }
+        }
     }
 }

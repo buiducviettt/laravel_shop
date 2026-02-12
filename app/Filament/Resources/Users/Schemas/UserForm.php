@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Filament\Resources\Users\Schemas;
+
 use Filament\Forms;
 use Filament\Schemas\Schema;
 
@@ -16,11 +17,23 @@ class UserForm
                     ->required(),
                 Forms\Components\TextInput::make('last_name')
                     ->label('Tên')
-                    ->required(),      
-                     // phân quyền 
+                    ->required(),
+                Forms\Components\TextInput::make('email')
+                    ->label('Email')
+                    ->email()
+                    ->required(),
+                Forms\Components\TextInput::make('phone')
+                    ->label('Điện thoại')
+                    ->required(),
+                //pass word 
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->label('Password')
+                    ->required(),
+                // phân quyền 
                 Forms\Components\Toggle::make('is_admin')
                     ->label('Admin')
-                    ->default(false),                      
+                    ->default(false),
             ]);
     }
 }
