@@ -2,7 +2,8 @@
 @extends('layouts.frontend')
 @section('title', 'Chi tiết sản phẩm')
 @section('content')
-<div class="product-detail-page">
+<div class="product-detail-page" >
+    <div class="product-detail" data-variants='@json($product->variants)'>
     <div class="sec-gap">
         <div class="container">
             {{-- Slug động --}}
@@ -19,7 +20,7 @@
     <span>{{ $product->name }}</span>
 </div>
             <div class="product-content sec-gap">
-          <div class="product-layout">
+          <div class="product-layout" >
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="product-gallery">
@@ -39,7 +40,7 @@
                             </div>
                             <p class="price">{{ number_format($product->base_price) }} ₫</p>
                             {{-- attribute --}}
-                            <div class="product-attribute">
+                            <div class="product-attribute" >
                                 <div class="color attr">
                                     <div class="title-atr">COLOURS</div>
                                     <div class="color-img-list">
@@ -65,14 +66,24 @@
                      </div>
                 </div>
           </div>
+          <section class="product-detail__meta">
+            <div class="wrapper">
+            <div class="product-detail__description">
+                <div class="product-tab">ABOUT THIS PRODUCT</div>
+                <div class="product-info-box"></div>
+            </div>
+            <div class="product-detail__sizes">
+                  <div class="product-tab"></div>
+                <div class="product-info-box"></div>
+            </div>
+            </div>
+          </section>
           </div>
         </div>
     </div>
     </div>
+    </div>
 
 @endsection
-    <script>
-    window.productVariants = @json($product->variants);
 
-</script>
 

@@ -1,70 +1,80 @@
-let selectedColor = null;
-let selectedSize = null;
-let selectedVariant = null;
 document.addEventListener("DOMContentLoaded", function () {
-    const productVariants = window.productVariants || [];
-    console.log(productVariants);
-    // chọn màu
-    document.querySelectorAll(".color-img").forEach((el) => {
-        el.addEventListener("click", function () {
-            document
-                .querySelectorAll(".color-img")
-                .forEach((c) => c.classList.remove("active"));
-            this.classList.add("active");
-            selectedColor = this.dataset.colorId;
-            findVariant(productVariants);
-        });
-    });
-    // chọn size
-    document.querySelectorAll(".size-icon").forEach((el) => {
-        el.addEventListener("click", function () {
-            document
-                .querySelectorAll(".size-icon")
-                .forEach((s) => s.classList.remove("active"));
-            this.classList.add("active");
+    document
+        .querySelectorAll(".product-card, .product-detail")
+        .forEach((card) => {
+            let selectedColor = null;
+            let selectedSize = null;
+            let selectedVariant = null;
 
-            selectedSize = this.dataset.sizeId;
-            findVariant(productVariants);
-        });
-    });
+            const productVariants = JSON.parse(card.dataset.variants || "[]");
 
-    function findVariant(productVariants) {
-        if (!selectedColor || !selectedSize) return;
+            // chọn màu
+            card.querySelectorAll(".color-img").forEach((el) => {
+                el.addEventListener("click", function () {
+                    card.querySelectorAll(".color-img").forEach((c) =>
+                        c.classList.remove("active"),
+                    );
 
-        selectedVariant = productVariants.find(
-            (v) => v.color_id == selectedColor && v.size_id == selectedSize,
-        );
+                    this.classList.add("active");
+                    selectedColor = this.dataset.colorId;
 
-        console.log("Variant đã chọn:", selectedVariant);
-    }
+                    findVariant();
+                });
+            });
 
-    // thêm vào giỏ
-    const btnAddCart = document.querySelector(".btn-add-cart");
+            // chọn size
+            card.querySelectorAll(".size-icon").forEach((el) => {
+                el.addEventListener("click", function () {
+                    card.querySelectorAll(".size-icon").forEach((s) =>
+                        s.classList.remove("active"),
+                    );
 
-    if (btnAddCart) {
-        btnAddCart.addEventListener("click", function () {
-            if (!selectedVariant) {
-                alert("Vui lòng chọn màu và size");
-                return;
+                    this.classList.add("active");
+                    selectedSize = this.dataset.sizeId;
+
+                    findVariant();
+                });
+            });
+
+            function findVariant() {
+                if (!selectedColor || !selectedSize) return;
+
+                selectedVariant = productVariants.find(
+                    (v) =>
+                        v.color_id == selectedColor &&
+                        v.size_id == selectedSize,
+                );
+
+                console.log("Variant đã chọn:", selectedVariant);
             }
 
-            fetch("/cart/add", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector(
-                        'meta[name="csrf-token"]',
-                    ).content,
-                },
-                body: JSON.stringify({
-                    variant_id: selectedVariant.id,
-                    quantity: 1,
-                }),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    alert("Đã thêm vào giỏ hàng");
+            const btnAddCart = card.querySelector(".btn-add-cart");
+
+            if (btnAddCart) {
+                btnAddCart.addEventListener("click", function () {
+                    if (!selectedVariant) {
+                        alert("Vui lòng chọn màu và size");
+                        return;
+                    }
+
+                    fetch("/cart/add", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector(
+                                'meta[name="csrf-token"]',
+                            ).content,
+                        },
+                        body: JSON.stringify({
+                            variant_id: selectedVariant.id,
+                            quantity: 1,
+                        }),
+                    })
+                        .then((res) => res.json())
+                        .then((data) => {
+                            alert("Đã thêm vào giỏ hàng");
+                        });
                 });
+            }
         });
-    }
 });

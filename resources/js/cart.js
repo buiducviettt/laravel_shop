@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartToggle = document.getElementById("cart-toggle");
     const miniCart = document.getElementById("mini-cart");
     const miniCartItems = document.querySelector(".mini-cart-items");
+    const totalPrice = document.querySelector(".total-price-value");
 
     if (!miniCart || !miniCartItems) return;
 
@@ -25,6 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 card?.querySelector(".size-icon.active")?.dataset.sizeId ||
                 null;
         }
+        //debug
+        console.log({
+            productId,
+            color,
+            size,
+        });
 
         fetch("/cart/add", {
             method: "POST",
@@ -41,22 +48,18 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((res) => res.json())
             .then((data) => {
                 if (!data.success) return;
-
                 if (cartCount) cartCount.innerText = data.count;
-
                 loadMiniCart();
                 miniCart.classList.add("active");
 
                 if (redirect) window.location.href = "/checkout";
             });
     }
-
     document.querySelectorAll(".btn-add-cart").forEach((btn) => {
         btn.addEventListener("click", () => {
             addToCart(btn.dataset.id, false, btn);
         });
     });
-
     document.querySelectorAll(".btn-buy-now").forEach((btn) => {
         btn.addEventListener("click", () => {
             addToCart(btn.dataset.id, true, btn);
@@ -87,8 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch("/cart/mini")
             .then((res) => res.json())
             .then((data) => {
-                miniCartItems.innerHTML = "";
-
                 if (!data.items.length) {
                     miniCartItems.innerHTML = "<p>Giỏ hàng trống</p>";
                     if (cartCount) cartCount.innerText = 0;
@@ -97,20 +98,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (cartCount) cartCount.innerText = data.count;
 
+                let html = `
+                <table class="mini-cart-table">
+                    <tbody>
+            `;
                 data.items.forEach((item) => {
-                    miniCartItems.innerHTML += `
-                    <div class="mini-cart-item">
-                        <span>${item.name}</span>
-                        <span>x ${item.quantity}</span>
-                        <button class="btn-remove-item" data-id="${item.product_id}">
-                            ❌
-                        </button>
-                    </div>
+                    html += `
+                    <tr class="mini-cart-row">
+                        <td class="cart-info">
+                <div class="cart-name">
+                    ${item.name} - ${item.size}
+                </div>
+                <div class="cart-price">
+                    Giá: ${formatPrice(item.price)}
+                </div>
+            </td>
+                    <td>x ${item.quantity}</td>
+                        <td>
+                            <button class="btn-remove-item" data-id="${item.product_id}">
+                                ❌
+                            </button>
+                        </td>
+                    </tr>
                 `;
                 });
+                html += `
+                    </tbody>
+                </table
+            `;
+                miniCartItems.innerHTML = html;
+                // tính total
+                if (totalPrice) {
+                    totalPrice.innerText = formatPrice(data.total);
+                }
             });
     }
-
     /* ================= REMOVE ITEM ================= */
 
     miniCartItems.addEventListener("click", (e) => {
@@ -131,3 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(() => loadMiniCart());
     });
 });
+//format price
+function formatPrice(price) {
+    return new Intl.NumberFormat("vi-VN").format(price) + "đ";
+}

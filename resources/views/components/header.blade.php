@@ -59,6 +59,12 @@
          <button id="close-cart" class="close-cart" >✖</button>
          </div>
         <div class="mini-cart-items"></div>
+        <div class="mini-cart-total">
+        <div class="total-price d-flex justify-content-between">
+        <span>Tổng:</span>
+        <span class="total-price-value"></span>
+        </div>
+        </div>
         <a href="/checkout" class="btn-checkout">Thanh toán</a>
     </div>
     </div>

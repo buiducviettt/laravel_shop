@@ -1,5 +1,5 @@
-<div class="product-card">
-
+<div class="product-card" data-variants='@json($product->variants)'>
+ 
     {{-- LINK chỉ cho image + tên + giá --}}
     <a href="{{ route('products.show', $product) }}" class="product-link">
         <div class="img-prod">
@@ -16,8 +16,7 @@
     </a>
 
     {{-- ATTRIBUTE nằm ngoài link --}}
-    <div class="product-attribute">
-
+    <div class="product-attribute d-flex flex-column gap-2">
         {{-- COLOR --}}
         <div class="color attr">
             <div class="color-img-list">
