@@ -88,14 +88,23 @@ h1 {
             overflow-y: auto; // scroll riêng
             padding: 16px;
         }
+        .mini-cart-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .mini-cart-row {
+            border-bottom: 1px solid #ddd;
+        }
+        .item-header {
+            display: flex;
+            flex-direction: column;
+        }
+        .mini-cart-row td {
+            padding: 8px 0;
+        }
     }
 
-    .mini-cart-item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 8px;
-        font-size: 14px;
-    }
     a {
         text-decoration: none;
         color: inherit;
