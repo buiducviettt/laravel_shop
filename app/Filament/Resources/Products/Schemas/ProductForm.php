@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Filament\Resources\Products\Schemas;
+
 use Filament\Forms\Components\Select;
 use Filament\Forms;
 use Filament\Schemas\Schema;
@@ -12,28 +13,28 @@ class ProductForm
     {
         return $schema->components([
             Select::make('category_id')
-    ->label('Danh mục sản phẩm')
-    ->relationship('category', 'name')
-    ->required(),
+                ->label('Danh mục sản phẩm')
+                ->relationship('category', 'name')
+                ->required(),
             Forms\Components\TextInput::make('name')
                 ->label('Tên sản phẩm')
-                 ->required()
+                ->required()
                 ->live(onBlur: true)
-    ->afterStateUpdated(function (string $state, callable $set) {
-        $set('slug', Str::slug($state));
-    }),
-    //chọn collection cho product
-  Select::make('collection_id')
-    ->label('Collection')
-    ->relationship('collection', 'name')
-    ->searchable()
-    ->preload()
-    ->nullable(),
-               Forms\Components\TextInput::make('slug')
+                ->afterStateUpdated(function (string $state, callable $set) {
+                    $set('slug', Str::slug($state));
+                }),
+            //chọn collection cho product
+            Select::make('collection_id')
+                ->label('Collection')
+                ->relationship('collection', 'name')
+                ->searchable()
+                ->preload()
+                ->nullable(),
+            Forms\Components\TextInput::make('slug')
                 ->label('Slug')
-                    ->required()
-    ->unique(ignoreRecord: true)
-    ->helperText('Tự động tạo từ tên sản phẩm, có thể chỉnh sửa'),
+                ->required()
+                ->unique(ignoreRecord: true)
+                ->helperText('Tự động tạo từ tên sản phẩm, có thể chỉnh sửa'),
 
             Forms\Components\Textarea::make('description')
                 ->label('Mô tả')
@@ -50,7 +51,7 @@ class ProductForm
                 ->relationship('images')
                 ->schema([
                     //thêm category cho products 
-                    
+
                     Forms\Components\FileUpload::make('image_url')
                         ->label('Ảnh')
                         ->disk('public')
@@ -71,6 +72,10 @@ class ProductForm
                 ->addActionLabel('Thêm ảnh')
                 ->defaultItems(0)
                 ->collapsible(),
+            // thêm phần nội dung 
+            Forms\Components\Textarea::make('content')
+                ->label('Noi dung')
+                ->rows(5),
         ]);
     }
 }

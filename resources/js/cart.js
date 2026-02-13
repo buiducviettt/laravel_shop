@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!data.items.length) {
                     miniCartItems.innerHTML = "<p>Giỏ hàng trống</p>";
                     if (cartCount) cartCount.innerText = 0;
+                    if (totalPrice) totalPrice.innerText = formatPrice(0);
                     return;
                 }
 

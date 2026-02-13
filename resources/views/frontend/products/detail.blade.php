@@ -69,7 +69,7 @@
           <section class="product-detail__meta">
             <div class="wrapper">
             <div class="product-detail__description">
-                <div class="product-tab">ABOUT THIS PRODUCT</div>
+                <div class="product-tab ">ABOUT THIS PRODUCT</div>
                 <div class="product-info-box"></div>
             </div>
             <div class="product-detail__sizes">
