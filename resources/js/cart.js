@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const miniCart = document.getElementById("mini-cart");
     const miniCartItems = document.querySelector(".mini-cart-items");
     const totalPrice = document.querySelector(".total-price-value");
-
     if (!miniCart || !miniCartItems) return;
 
     /* ================= ADD TO CART ================= */
