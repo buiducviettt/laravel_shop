@@ -10,8 +10,7 @@
         </div>
 
         <h4 class="prod-name">{{ $product->name }}</h4>
-        <p class="price">
-            {{ number_format($product->base_price) }} ₫
+        <p class="total-price-value">
         </p>
     </a>
 

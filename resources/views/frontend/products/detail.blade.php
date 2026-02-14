@@ -5,10 +5,10 @@
 <div class="product-detail-page" >
     <div class="product-detail" data-variants='@json($product->variants)'>
     <div class="sec-gap">
-        <div class="container">
+        <div class="container"> 
             {{-- Slug động --}}
          <div class="slug">
-    <a href="{{ route('home') }}">Home</a>
+    <a href="{{ route('home') }}">Home</a>  
     <span>/</span>
 
     <a href="{{ route('products.index') }}">Products</a>
@@ -38,7 +38,7 @@
                             <div class="product-desc">
                                 <p>{{ $product->description }}</p>
                             </div>
-                            <p class="price">{{ number_format($product->base_price) }} ₫</p>
+                            <p class="total-price-value"></p>
                             {{-- attribute --}}
                             <div class="product-attribute" >
                                 <div class="color attr">

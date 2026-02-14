@@ -52,4 +52,16 @@ class Product extends Model
             ->where('is_main', true)
             ->orderBy('sort_order');
     }
+    // giá sale 
+    public function getFinalPriceAttribute()
+    {
+        if (!$this->sale_price) return $this->base_price;
+        if ($this->sale_start_at && now()->lt($this->sale_start_at)) {
+            return $this->base_price;
+        }
+        if ($this->sale_end_at && now()->gt($this->sale_end_at)) {
+            return $this->base_price;
+        }
+        return $this->sale_price;
+    }
 }

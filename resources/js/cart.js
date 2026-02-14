@@ -6,10 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartToggle = document.getElementById("cart-toggle");
     const miniCart = document.getElementById("mini-cart");
     const miniCartItems = document.querySelector(".mini-cart-items");
-    const totalPrice = document.querySelector(".total-price-value");
 
     if (!miniCart || !miniCartItems) return;
-
     /* ================= ADD TO CART ================= */
 
     function addToCart(productId, redirect = false, btn = null) {
@@ -51,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (cartCount) cartCount.innerText = data.count;
                 loadMiniCart();
                 miniCart.classList.add("active");
-
                 if (redirect) window.location.href = "/checkout";
             });
     }
