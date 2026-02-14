@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalPrice = document.querySelector(".total-price-value");
 
     if (!miniCart || !miniCartItems) return;
-
     /* ================= ADD TO CART ================= */
 
     function addToCart(productId, redirect = false, btn = null) {
@@ -51,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (cartCount) cartCount.innerText = data.count;
                 loadMiniCart();
                 miniCart.classList.add("active");
-
                 if (redirect) window.location.href = "/checkout";
             });
     }
