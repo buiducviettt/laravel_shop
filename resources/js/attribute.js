@@ -5,8 +5,22 @@ document.addEventListener("DOMContentLoaded", function () {
             let selectedColor = null;
             let selectedSize = null;
             let selectedVariant = null;
-
             const productVariants = JSON.parse(card.dataset.variants || "[]");
+            const priceEl = card.querySelector(".total-price-value");
+            const colorEls = card.querySelectorAll(".color-img");
+            const sizeEls = card.querySelectorAll(".size-icon");
+            //auto chọn màu và size đầu tiên khi load trang
+            if (colorEls.length) {
+                colorEls[0].classList.add("active");
+                selectedColor = colorEls[0].dataset.colorId;
+            }
+
+            if (sizeEls.length) {
+                sizeEls[0].classList.add("active");
+                selectedSize = sizeEls[0].dataset.sizeId;
+            }
+
+            findVariant();
 
             // chọn màu
             card.querySelectorAll(".color-img").forEach((el) => {
@@ -46,6 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
                 console.log("Variant đã chọn:", selectedVariant);
+                if (priceEl) {
+                    priceEl.innerText =
+                        new Intl.NumberFormat("vi-VN").format(
+                            selectedVariant.price,
+                        ) + "đ";
+                }
             }
 
             const btnAddCart = card.querySelector(".btn-add-cart");
