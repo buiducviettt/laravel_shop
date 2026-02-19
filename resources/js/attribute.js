@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const updatePrice = document.getElementById("product-price");
     document
         .querySelectorAll(".product-card, .product-detail")
         .forEach((card) => {
