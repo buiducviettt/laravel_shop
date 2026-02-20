@@ -5,19 +5,22 @@ document.addEventListener("DOMContentLoaded", function () {
             let selectedColor = null;
             let selectedSize = null;
             let selectedVariant = null;
+
             const productVariants = JSON.parse(card.dataset.variants || "[]");
             const priceEl = card.querySelector(".total-price-value");
-            const colorEls = card.querySelectorAll(".color-img");
-            const sizeEls = card.querySelectorAll(".size-icon");
-            //auto chọn màu và size đầu tiên khi load trang
-            if (colorEls.length) {
-                colorEls[0].classList.add("active");
-                selectedColor = colorEls[0].dataset.colorId;
+
+            // auto chọn màu đầu tiên
+            const firstColor = card.querySelector(".color-img");
+            if (firstColor) {
+                firstColor.classList.add("active");
+                selectedColor = firstColor.dataset.colorId;
             }
 
-            if (sizeEls.length) {
-                sizeEls[0].classList.add("active");
-                selectedSize = sizeEls[0].dataset.sizeId;
+            // auto chọn size đầu tiên
+            const firstSize = card.querySelector(".size-icon");
+            if (firstSize) {
+                firstSize.classList.add("active");
+                selectedSize = firstSize.dataset.sizeId;
             }
 
             findVariant();
@@ -59,7 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         v.size_id == selectedSize,
                 );
 
+                if (!selectedVariant) return;
+
                 console.log("Variant đã chọn:", selectedVariant);
+
+                // ===== UPDATE GIÁ =====
                 if (priceEl) {
                     priceEl.innerText =
                         new Intl.NumberFormat("vi-VN").format(
@@ -91,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         }),
                     })
                         .then((res) => res.json())
-                        .then((data) => {
+                        .then(() => {
                             alert("Đã thêm vào giỏ hàng");
                         });
                 });

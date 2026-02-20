@@ -54,13 +54,12 @@
             data-id="{{ $product->id }}">
             Mua ngay
         </button>
-
-        <button 
-            type="button"
-            class="btn btn-secondary btn-add-cart"
-            data-id="{{ $product->id }}">
-            Thêm vào giỏ
-        </button>
+       <button 
+    type="button"
+    class="btn btn-secondary btn-add-cart"
+    data-id="{{ $product->id }}">
+    Thêm vào giỏ
+</button>
     </div>
 
 </div>

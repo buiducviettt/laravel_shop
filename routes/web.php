@@ -80,7 +80,7 @@ Route::prefix('cart')->name('cart.')->group(function () {
 });
 
 // checkout 
-Route::prefix('checkout')->name('checkout.')->group(function () {
+Route::prefix('checkout')->name('checkout.')->middleware('auth')->group(function () {
     Route::get('/', [CheckoutController::class, 'index'])->name('index');
     Route::post('/store', [CheckoutController::class, 'store'])->name('store');
 });
