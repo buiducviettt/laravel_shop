@@ -59,8 +59,8 @@
                                 </div>
                             </div>
                             <div class="product-cta">
-                                <button class="btn btn-primary btn-buy-now" data-id="{{ $product->id }}">Mua ngay</button>
-                                <button class="btn btn-secondary btn-add-cart" data-id="{{ $product->id }}">Thêm vào giỏ hàng</button>
+                                <button type="button" class="btn btn-primary btn-buy-now" data-id="{{ $product->id }}">Mua ngay</button>
+                                <button type="button" class="btn btn-secondary btn-add-cart" data-id="{{ $product->id }}">Thêm vào giỏ hàng</button>
                             </div>
                         </div>
                      </div>

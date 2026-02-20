@@ -7,45 +7,36 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductVariants;
 
+
 class CartController extends Controller
 {
-    //
     public function addToCart(Request $request)
     {
         $cart = session()->get('cart', []);
-        $id = $request->product_id;
-
-        $product = Product::findOrFail($id);
-
-        $colorId = $request->color;
-        $sizeId  = $request->size;
-
-        // Tìm variant nếu có
-        $variant = null;
-
-        if ($colorId && $sizeId) {
-            $variant = $product->variants()
-                ->where('color_id', $colorId)
-                ->where('size_id', $sizeId)
-                ->with(['color', 'size'])
-                ->first();
+        $product = Product::findOrFail($request->product_id);
+        $variant = $product->variants()
+            ->where('color_id', $request->color)
+            ->where('size_id', $request->size)
+            ->with(['color', 'size'])
+            ->first();
+        if (!$variant) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Variant không tồn tại'
+            ], 400);
         }
-
-        $key = $variant
-            ? $id . '-' . $variant->id   // mỗi variant là 1 dòng riêng
-            : $id;
-
+        $key = $product->id . '-' . $variant->id;
         if (isset($cart[$key])) {
             $cart[$key]['quantity']++;
         } else {
             $cart[$key] = [
-                'product_id' => $id,
-                'variant_id' => $variant?->id,
-                'name' => $product->name,
-                'price' => $product->base_price,
-                'color' => $variant?->color->name ?? null,
-                'size'  => $variant?->size->name ?? null,
-                'quantity' => 1
+                'product_id' => $product->id,
+                'variant_id' => $variant->id,
+                'name'       => $product->name,
+                'price'      => $variant->price,
+                'color'      => $variant->color->name,
+                'size'       => $variant->size->name,
+                'quantity'   => 1
             ];
         }
 
@@ -53,7 +44,7 @@ class CartController extends Controller
 
         return response()->json([
             'success' => true,
-            'count' => collect($cart)->sum('quantity')
+            'count'   => collect($cart)->sum('quantity')
         ]);
     }
 

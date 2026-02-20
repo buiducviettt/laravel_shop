@@ -43,3 +43,4 @@ import "./profile";
 import "./apicountry";
 import "./cart";
 import "./attribute";
+import "./apivietnam";

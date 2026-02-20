@@ -63,6 +63,7 @@
         <div class="total-price d-flex justify-content-between">
         <span>Tổng:</span>
         <span class="total-price-value"></span>
+        
         </div>
         </div>
         <a href="/checkout" class="btn-checkout">Thanh toán</a>
